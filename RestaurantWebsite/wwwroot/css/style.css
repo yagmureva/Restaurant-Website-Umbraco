@@ -1,0 +1,122 @@
+/* =========================
+   RESET / BASE
+========================= */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+/* =========================
+   HEADER
+========================= */
+.site-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.custom-navbar {
+    height: 130px;
+    background: rgba(0,0,0,0.7); /* transparan siyah */
+}
+
+.site-logo {
+    max-height: 140px;
+}
+
+.site-title {
+    color: #FA8112;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+/* NAV LINKS */
+.navbar-nav .nav-link {
+    color: #FA8112;
+    font-weight: 600;
+    padding: 8px 14px;
+    transition: 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ff6600;
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+}
+
+/* =========================
+   HERO (FULL SCREEN)
+========================= */
+.hero {
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 0;          /* header yüksekliği */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1;
+
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+}
+
+/* =========================
+   FOOTER
+========================= */
+.site-footer {
+    background: #222;
+    color: #F54927;
+    padding: 20px 0;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+    .site-logo {
+        max-height: 100px;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+}
