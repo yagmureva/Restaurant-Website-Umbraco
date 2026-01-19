@@ -1,5 +1,136 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+﻿@using Umbraco.Cms.Web.Common.PublishedModels
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<FoodMenu>
+
 @{
-	Layout = "master.cshtml";
+    Layout = "master.cshtml";
+
+    var foodItems = Model.Children();
+    var menuTitle = Model.Value<string>("menuTitle") ?? Model.Name;
+          var backgroundImage = Model.Value<IPublishedContent>("backgroundImage");
 }
+
+
+<!-- HERO SECTION -->
+<section class="menu-hero"
+         style="@(backgroundImage != null 
+                 ? $"background-image:url('{backgroundImage.Url()}')" 
+                 : "")">
+
+    <div class="menu-hero-overlay"></div>
+
+    <div class="container menu-hero-content">
+        <h1>@menuTitle</h1>
+        <p>Taste our signature Malatya dishes, rich in flavor and tradition.</p>
+    </div>
+</section>
+
+<!-- FOOD MENU -->
+<section id="food-menu" class="food-menu-section py-5">
+    <div class="container">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+            @foreach (var item in foodItems)
+            {
+                var name = item.Value<string>("itemName");
+                var description = item.Value<string>("itemDescription");
+                var price = item.Value<decimal>("itemPrice");
+                var image = item.Value<IPublishedContent>("itemImage");
+                var isVeg = item.Value<bool>("isVegetarian");
+
+                <div class="col">
+                    <div class="card food-item h-100 shadow-sm">
+
+                        @if (image != null)
+                        {
+                            <img src="@image.Url()" alt="@name" class="card-img-top">
+                        }
+
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">
+                                @name
+                                @if (isVeg)
+                                {
+                                    <span class="veg">🌱</span>
+                                }
+                            </h5>
+
+                            <p class="card-text flex-grow-1">@description</p>
+
+                            <div class="food-price">@price dkk</div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</section>
+<style>/* ======================
+   HERO SECTION
+====================== */
+.menu-hero {
+    position: relative;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    margin-top: 130px; /* fixed navbar height */
+}
+
+.menu-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+}
+
+.menu-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+}
+
+.menu-hero-content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    text-align: center;
+}
+
+.menu-hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.menu-hero p {
+    font-size: 1.25rem;
+    opacity: 0.9;
+}
+
+/* ======================
+   FOOD CARDS
+====================== */
+.food-item {
+    border: none;
+    transition: transform .3s, box-shadow .3s;
+}
+
+.food-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgba(0,0,0,.2);
+}
+
+.food-item img {
+    height: 180px;
+    object-fit: cover;
+}
+
+.food-price {
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.veg {
+    font-size: 0.9rem;
+}
+</style>

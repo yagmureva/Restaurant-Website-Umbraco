@@ -1,5 +1,107 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+﻿@using Umbraco.Cms.Web.Common.PublishedModels
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<AboutUs>
+
 @{
-	Layout = "master.cshtml";
+    Layout = "master.cshtml";
+
+    // Hero
+    var heroTitle = Model.Value<string>("heroTitle") ?? "About Us";
+    var heroDescription = Model.Value<string>("heroDescription") 
+        ?? "Since 2010, we have been proudly serving authentic Malatya cuisine. Every dish is crafted with care, love, and tradition.";
+    var heroImage = Model.Value<IPublishedContent>("aboutImage"); 
+
+    // About 
+    var aboutTitle = Model.Value<string>("aboutTitle") ?? "Our Story";
+    var aboutDescription = Model.Value<string>("aboutDescription") 
+        ?? "From traditional recipes to modern culinary creativity, we bring the heart of Malatya to every plate. Our restaurant is committed to quality, fresh ingredients, and memorable dining experiences.";
 }
+
+<!-- HERO SECTION -->
+<section class="about-hero">
+    @if(heroImage != null)
+    {
+        <div class="about-hero-bg" style="background-image:url('@heroImage.Url()');"></div>
+    }
+
+    <div class="about-hero-overlay"></div>
+
+    <div class="container about-hero-content text-center">
+       
+        <p>@heroDescription</p>
+    </div>
+</section>
+
+<!-- ABOUT SECTION (Image Removed) -->
+<section class="about-section py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <h2>@aboutTitle</h2>
+                <p class="about-description">@aboutDescription</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* ======================
+   HERO SECTION
+====================== */
+.about-hero {
+    position: relative;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: 50%;
+    background-position: center;
+    z-index: 0;
+}
+
+.about-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1;
+}
+
+.about-hero-content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    max-width: 900px;
+}
+
+.about-hero-content h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.about-hero-content p {
+    font-size: 1.5rem; /* Bigger text */
+    line-height: 1.8;
+    opacity: 0.95;
+}
+
+/* ======================
+   ABOUT SECTION
+====================== */
+.about-section h2 {
+    font-size: 2.5rem; /* Bigger heading */
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.about-description {
+    font-size: 1.25rem; /* Bigger paragraph */
+    color: #555;
+    line-height: 1.8;
+    text-align: center;
+}
+</style>

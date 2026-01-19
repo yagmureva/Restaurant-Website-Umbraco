@@ -1,16 +1,14 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels
+﻿ @using Umbraco.Cms.Web.Common.PublishedModels
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @inject Umbraco.Cms.Web.Common.UmbracoHelper umbracoHelper
 
 @{
     Layout = null;
 
-    // Root content
     var root = umbracoHelper.ContentAtRoot().FirstOrDefault();
     var siteName = root?.Value<string>("siteName") ?? "Mavi's Restaurant";
     var logo = root?.Value<IPublishedContent>("logo");
 
-    // Footer info
     var companyName = root?.Value<string>("companyName") ?? siteName;
     var companyAddress = root?.Value<string>("companyAddress") ?? "";
     var companyPhone = root?.Value<string>("companyPhone") ?? "";
@@ -32,15 +30,12 @@
 
     <!-- HEADER -->
     <header>
-   <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
-
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
             <div class="container">
-                <!-- Logo -->
                 <a class="navbar-brand d-flex align-items-center" href="/">
                     @if (logo != null)
                     {
-                 <img src="@logo.Url()" alt="@siteName" class="site-logo" />
-
+                        <img src="@logo.Url()" alt="@siteName" class="site-logo" />
                     }
                     else
                     {
@@ -48,13 +43,11 @@
                     }
                 </a>
 
-                <!-- Hamburger menu for mobile -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <!-- Nav links -->
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         @foreach (var child in Model.Root().Children())
@@ -75,7 +68,7 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-dark text-white py-4 mt-6">
+    <footer class="site-footer py-4 mt-6">
         <div class="container text-center">
             <p class="mb-0">© @DateTime.Now.Year @companyName | @companyAddress | @companyPhone</p>
         </div>

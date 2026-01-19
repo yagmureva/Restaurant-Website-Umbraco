@@ -1,0 +1,167 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContactUs>
+
+@{
+    Layout = "master.cshtml";
+
+    // Hero 
+    var heroTitle = Model.Value<string>("heroTitle") ?? "Get in Touch";
+    var heroDescription = Model.Value<string>("heroDescription") ?? "We’d love to hear from you! Fill out the form below or contact us directly.";
+    var heroImage = Model.Value<IPublishedContent>("heroImage");
+
+    // Contact info
+    var addressTitle = Model.Value<string>("addressTitle") ?? "Our Location";
+    var addressDescription = Model.Value<string>("addressDescription") ?? "123 Main Street, Copenhagen, Denmark";
+
+    var phoneTitle = Model.Value<string>("phoneTitle") ?? "Call Us";
+    var phoneNumber = Model.Value<string>("phoneNumber") ?? "+45 123 456 789";
+
+    var emailTitle = Model.Value<string>("emailTitle") ?? "Email";
+    var emailAddress = Model.Value<string>("emailAddress") ?? "info@restaurant.com";
+
+    var formTitle = Model.Value<string>("formTitle") ?? "Send Us a Message";
+    var formDescription = Model.Value<string>("formDescription") ?? "Fill out the form and we will respond as soon as possible.";
+}
+
+<!-- HERO SECTION -->
+<section class="contact-hero" style="background-image:url('@heroImage.Url()');');\"" : "")>
+    <div class="contact-hero-overlay"></div>
+    <div class="container contact-hero-content text-center">
+        <h1>@heroTitle</h1>
+        <p>@heroDescription</p>
+    </div>
+</section>
+
+<!-- CONTACT INFO & FORM -->
+<section class="contact-section py-5">
+    <div class="container">
+        <div class="row g-5">
+
+            <!-- Contact Info -->
+            <div class="col-md-5">
+                <h2>Contact Information</h2>
+
+                <div class="contact-info mb-4">
+                    <h5>@addressTitle</h5>
+                    <p>@addressDescription</p>
+                </div>
+
+                <div class="contact-info mb-4">
+                    <h5>@phoneTitle</h5>
+                    <p>@phoneNumber</p>
+                </div>
+
+                <div class="contact-info mb-4">
+                    <h5>@emailTitle</h5>
+                    <p>@emailAddress</p>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="col-md-7">
+                <h2>@formTitle</h2>
+                <p>@formDescription</p>
+
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" id="name" class="form-control" placeholder="Your Name">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" class="form-control" placeholder="you@example.com">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea id="message" class="form-control" rows="5" placeholder="Your message..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<style>
+/* ======================
+   HERO SECTION
+====================== */
+.contact-hero {
+    position: relative;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: 50%;
+    background-position: center;
+}
+
+.contact-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1;
+}
+
+.contact-hero-content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    max-width: 800px;
+}
+
+.contact-hero-content h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.contact-hero-content p {
+    font-size: 1.25rem;
+    opacity: 0.9;
+}
+
+/* ======================
+   CONTACT SECTION
+====================== */
+.contact-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.contact-info h5 {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.contact-info p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+form label {
+    font-weight: 600;
+}
+
+form .form-control {
+    border-radius: 5px;
+}
+
+form button.btn-primary {
+    background-color: #FA8112;
+    border: none;
+    padding: 10px 25px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+form button.btn-primary:hover {
+    background-color: #ff6600;
+}
+</style>

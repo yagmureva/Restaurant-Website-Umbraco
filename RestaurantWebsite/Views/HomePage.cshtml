@@ -5,8 +5,8 @@
     Layout = "Master";
 
     var bgImage = Model.Value<IPublishedContent>("backgroundImage");
-    var heroTitle = Model.Value<string>("heroTitle") ?? "Welcome to Our Restaurant";
-    var heroDescription = Model.Value<string>("heroDescription") ?? "Delicious food just for you!";
+    var heroTitle = Model.Value<string>("heroTitle") ?? "Taste the Flavors of Malatya Cuisine";
+    var heroDescription = Model.Value<string>("heroDescription") ?? "Savor traditional dishes crafted from local ingredients, bursting with Anatolian and Malatya flavors!";
 }
 
 <section class="hero" style="@(bgImage != null ? $"background-image: url('{bgImage.Url()}');" : "")">
