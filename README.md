@@ -23,6 +23,7 @@ The goal of this project was to practice real-world CMS usage and build a clean,
 - Building reusable Razor views  
 - Structuring a CMS-driven website  
 
+
 ## Preview
 High-quality preview video:  
 https://www.loom.com/share/8ecdb9dbbfed4a248c4c9b0fe2ffc381
